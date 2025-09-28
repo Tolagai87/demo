@@ -2,3 +2,13 @@
   become: yes
   roles:
     - etcd
+
+- hosts: docker
+  become: yes
+  roles:
+    - docker
+
+- hosts: pg_cluster
+  become: yes
+  roles:
+    - postgresql_patroni
