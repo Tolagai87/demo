@@ -1,0 +1,31 @@
+---
+# tasks file for docker
+- name: Copy Docker repo
+  template:
+    src: docker-ce.repo.j2
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install Docker
+  dnf:
+    name: docker-ce
+    state: latest
+
+- name: Docker directory
+  block:
+  - name: Check if output directory exists
+    stat:
+      path: "{{ docker_dir }}"
+    register: output_folder
+  - name: Create docker directory
+    file:
+      path: "{{ docker_dir }}"
+      state: directory
+      mode: '0775'
+    when: output_folder.stat.exists == false
+
+- name: Docker config
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify:
+  - start

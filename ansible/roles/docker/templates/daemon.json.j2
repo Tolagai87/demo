@@ -1,0 +1,26 @@
+{
+  "icc": false,
+  "live-restore": true,
+  "userland-proxy": false,
+  "no-new-privileges": true,
+  "data-root": "{{ docker_dir }}",
+  "storage-driver": "overlay2",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "1"
+  },
+  "default-ulimits": {
+    "nproc": {
+      "Hard": 8192,
+      "Name": "nproc",
+      "Soft": 4096
+    },
+    "nofile": {
+      "Hard": 64000,
+      "Name": "nofile",
+      "Soft": 64000
+    }
+  },
+  "registry-mirrors": ["https://docker.mirror.erg.kz"]
+}
