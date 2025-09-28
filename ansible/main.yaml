@@ -1,0 +1,4 @@
+- hosts: etcd
+  become: yes
+  roles:
+    - etcd

@@ -1,0 +1,54 @@
+- name: Install etcd package
+  dnf:
+    name: etcd
+    state: present
+
+- name: Ensure etcd group exists
+  group:
+    name: "{{ etcd_group }}"
+    state: present
+
+- name: Ensure etcd user exists
+  user:
+    name: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    create_home: no
+    shell: /sbin/nologin
+
+- name: Create etcd config directory
+  file:
+    path: "{{ etcd_config_file | dirname }}"
+    state: directory
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    mode: '0755'
+
+- name: Create etcd data directory
+  file:
+    path: "{{ etcd_data_dir }}"
+    state: directory
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    mode: '0700'
+
+- name: Deploy etcd configuration file
+  template:
+    src: etcd.conf.j2
+    dest: "{{ etcd_config_file }}"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    mode: '0644'
+  notify: Restart etcd
+
+- name: Deploy etcd systemd unit
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    mode: '0644'
+  notify: Reload systemd
+
+- name: Enable and start etcd service
+  systemd:
+    name: etcd
+    enabled: yes
+    state: started

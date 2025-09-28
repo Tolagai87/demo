@@ -1,0 +1,13 @@
+[Unit]
+Description=etcd key-value store
+After=network.target
+
+[Service]
+User={{ etcd_user }}
+Type=notify
+ExecStart=/usr/bin/etcd --config-file={{ etcd_config_path }}
+Restart=always
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

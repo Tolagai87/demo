@@ -1,0 +1,6 @@
+etcd_user: etcd
+etcd_group: etcd
+etcd_data_dir: /var/lib/etcd
+etcd_config_file: /etc/etcd/etcd.conf
+etcd_bin_path: /usr/bin/etcd
+etcdctl_bin_path: /usr/bin/etcdctl
