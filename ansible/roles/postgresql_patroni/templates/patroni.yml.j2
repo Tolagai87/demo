@@ -1,0 +1,33 @@
+name: {{ ansible_hostname }}
+scope: pgcluster
+namespace: /service/
+restapi:
+  listen: {{ ansible_defailt_ipv4.address }}:8008
+  connect_address: {{ ansible_defailt_ipv4.address }}:8008
+
+etcd:
+  host: {{ etcd_host }}:2379
+
+postgresql:
+  listen: {{ ansible_defailt_ipv4.address }}:5432
+  connect_address: {{ ansible_defailt_ipv4.address }}:5432
+  data_dir: {{ ps_datadir }}/data
+  bin_dir: /usr/pgsql-16/bin
+  authentication:
+    superuser:
+      username: postgres
+      password: {{ pg_user_pass }}
+    replication:
+      username: {{ pg_replica_user }}
+      password: {{ pg_replica_userpass }}
+  parameters:
+    wal_level: replica
+    hot_standby: "on"
+    max_wal_senders: 10
+    max_replication_slots: 10
+    synchronous_commit: "remote_apply"
+
+tags:
+  nofailover: false
+  noloadbalance: false
+  clonefrom: false

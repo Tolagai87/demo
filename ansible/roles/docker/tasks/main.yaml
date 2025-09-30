@@ -1,10 +1,5 @@
 ---
 # tasks file for docker
-- name: Copy Docker repo
-  template:
-    src: docker-ce.repo.j2
-    dest: /etc/yum.repos.d/docker-ce.repo
-
 - name: Install Docker
   dnf:
     name: docker-ce
