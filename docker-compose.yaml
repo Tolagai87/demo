@@ -18,7 +18,7 @@ services:
     ports:
       - "9187:9187"
     environment:
-      DATA_SOURCE_NAME: "postgresql://test_user:your_password@host.docker.internal:5432/test_db1?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://test_user:m9DMjeb2JoADF8kgZxfx@host.docker.internal:5432/test_db1?sslmode=disable"
 
   node_exporter:
     image: prom/node-exporter:latest
