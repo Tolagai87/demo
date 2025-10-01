@@ -30,11 +30,6 @@ CREATE DATABASE test_db1 OWNER test_user;
 
 CREATE EXTENSION pg_stat_statements;
 
-#внести корректировку в конфиг postgrsql.conf эти строки и перезапустить сервис
- shared_preload_libraries = 'pg_stat_statements'
- pg_stat_statements.max = 10000
- pg_stat_statements.track = all
-
 CREATE ROLE svc_monitoring WITH LOGIN PASSWORD 'vxonMmJjOGKOZzgPx3z0';
 
 GRANT CONNECT ON DATABASE postgres TO svc_monitoring;
@@ -42,3 +37,10 @@ GRANT SELECT ON pg_stat_database TO svc_monitoring;
 GRANT SELECT ON pg_stat_activity TO svc_monitoring;
 GRANT SELECT ON pg_locks TO svc_monitoring;
 GRANT SELECT ON pg_stat_replication TO svc_monitoring;
+
+
+Если не собираются метрики с БД
+curl http://localhost:9187/metrics | grep pg_
+
+\dx
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
