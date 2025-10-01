@@ -1,9 +1,10 @@
 scope: {{ cluster_name }}
 name: {{ inventory_hostname }}
-namespace: /service/
 
 etcd:
   host: {{ etcd_host }}:2379
+  protocol: http
+  api_version: 3
 
 postgresql:
   listen: "{{ ansible_host }}:5432"
