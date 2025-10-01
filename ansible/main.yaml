@@ -1,18 +1,18 @@
-- hosts: etcd
-  become: yes
-  roles:
-    - etcd
+# - hosts: etcd
+#   become: yes
+#   roles:
+#     - etcd
 
-- hosts: docker
-  become: yes
-  roles:
-    - docker
+# - hosts: docker
+#   become: yes
+#   roles:
+#     - docker
 
-- hosts: pg_cluster
-  become: yes
-  roles:
-    - postgresql_patroni
-    - postgres_exporter
+# - hosts: pg_cluster
+#   become: yes
+#   roles:
+#     - postgresql_patroni
+#     - postgres_exporter
 
 - hosts: all
   become: yes
