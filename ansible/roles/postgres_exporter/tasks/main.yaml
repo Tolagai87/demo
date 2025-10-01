@@ -1,0 +1,37 @@
+- name: Ensure monitoring user exists
+  user:
+    name: "{{ pg_exporter_user }}"
+    shell: /bin/bash
+    state: present
+    create_home: yes
+
+- name: Create installation directory
+  file:
+    path: "{{ install_dir }}"
+    state: directory
+    owner: "{{ pg_exporter_user }}"
+    group: "{{ pg_exporter_user }}"
+    mode: '0755'
+
+- name: Copy Exporter
+  files:
+    src: postgres_exporter
+    dest: "{{ install_dir }}/postgres_exporter"
+    owner: "{{ pg_exporter_user }}"
+    group: "{{ pg_exporter_user }}"
+    mode: '0644'
+
+- name: Copy Postgres Exporter systemd service
+  template:
+    src: "postgres_exporter.service.j2"
+    dest: "/etc/systemd/system/postgres_exporter.service"
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start exporter
+  systemd:
+    name: postgres_exporter
+    state: started
+    enabled: yes

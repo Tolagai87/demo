@@ -1,0 +1,10 @@
+---
+postgres_exporter_version: "0.18.0"
+postgres_exporter_port: 9187
+install_dir: "/opt/monitoring"
+pg_exporter_user: monitor
+
+postgres_user: "postgres"
+postgres_password: "postgres"
+postgres_db: "postgres"
+postgres_port: 5432
