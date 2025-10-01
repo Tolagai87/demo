@@ -1,14 +1,19 @@
-- hosts: etcd
+- hosts: all
   become: yes
   roles:
-    - etcd
+    - add_ssh
 
-- hosts: docker
-  become: yes
-  roles:
-    - docker
+# - hosts: etcd
+#   become: yes
+#   roles:
+#     - etcd
 
-- hosts: pg_cluster
-  become: yes
-  roles:
-    - postgresql_patroni
+# - hosts: docker
+#   become: yes
+#   roles:
+#     - docker
+
+# - hosts: pg_cluster
+#   become: yes
+#   roles:
+#     - postgresql_patroni
