@@ -12,9 +12,9 @@
   become: yes
   roles:
     - postgresql_patroni
-    - postges_exporter
+    - postgres_exporter
 
 - hosts: all
-  become:
+  become: yes
   roles:
     - node_exporter
