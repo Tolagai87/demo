@@ -3,25 +3,24 @@
   hosts: all
   become: true
   vars:
-    ssh_user: vagrant
-    target_user: ansible
+    ssh_user: ansible
     ssh_pubkey_path: /home/ansible/.ssh/id_rsa.pub
-    ssh_dir: "/home/{{ target_user }}/.ssh"
-    ssh_auth_file: "{{ target_user }}/authorized_keys"
+    ssh_dir: "/home/{{ ssh_user }}/.ssh"
+    ssh_auth_file: "{{ ssh_dir }}/authorized_keys"
 
   tasks:
     - name: Ensure .ssh directory exists
       file:
-        path: "{{ target_user }}"
+        path: "{{ ssh_dir }}"
         state: directory
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
+        owner: "{{ ssh_user }}"
+        group: "{{ ssh_user }}"
         mode: '0700'
 
     - name: Copy public key to authorized_keys
       copy:
         src: "{{ ssh_pubkey_path }}"
         dest: "{{ ssh_auth_file }}"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
+        owner: "{{ ssh_user }}"
+        group: "{{ ssh_user }}"
         mode: '0600'
