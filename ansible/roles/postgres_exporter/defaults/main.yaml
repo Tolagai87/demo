@@ -4,8 +4,8 @@ postgres_exporter_port: 9187
 install_dir: "/opt/monitoring"
 pg_exporter_user: monitor
 
-postgres_user: "postgres"
-postgres_password: "postgres"
+postgres_user: "svc_monitoring"
+postgres_password: "vxonMmJjOGKOZzgPx3z0"
 postgres_db: "postgres"
 postgres_port: 5432
 postgres_host: "localhost"

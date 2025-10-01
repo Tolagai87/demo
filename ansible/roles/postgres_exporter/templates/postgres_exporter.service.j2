@@ -3,8 +3,8 @@ Description=Postgres Exporter
 After=network.target
 
 [Service]
-User=root
-Environment="DATA_SOURCE_NAME=postgresql://{{ postgres_user }}:{{ postgres_password }}@{{ postgres_host }}:{{ postgres_port }}/{{ postgres_db }}?sslmode=disable"
+User={{ pg_exporter_user }}
+Environment="DATA_SOURCE_NAME=postgresql://{{ postgres_user }}:{{ postgres_password }}@{{ ansible_host }}:{{ postgres_port }}/{{ postgres_db }}?sslmode=disable"
 ExecStart={{ install_dir }}/postgres_exporter --web.listen-address=:{{ postgres_exporter_port }}
 Restart=always
 
