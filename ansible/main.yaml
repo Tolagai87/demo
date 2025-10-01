@@ -8,13 +8,13 @@
 #   roles:
 #     - docker
 
-# - hosts: pg_cluster
-#   become: yes
-#   roles:
-#     - postgresql_patroni
-#     - postgres_exporter
-
-- hosts: all
+- hosts: pg_cluster
   become: yes
   roles:
-    - node_exporter
+    # - postgresql_patroni
+    - postgres_exporter
+
+# - hosts: all
+#   become: yes
+#   roles:
+#     - node_exporter
