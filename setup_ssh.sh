@@ -13,8 +13,6 @@ fi
 for HOST in "${HOSTS[@]}"; do
   echo "🔗 Настраиваю SSH-доступ на $HOST..."
 
-  ssh "$USER@$HOST" "sudo mkdir -p $TARGET/.ssh && sudo chmod 700 $TARGET/.ssh && sudo chown ansible:ansible $TARGET/.ssh"
-
   cat "$PUBKEY" | ssh "$USER@$HOST" "sudo tee $TARGET/.ssh/authorized_keys > /dev/null && sudo chmod 600 $TARGET/.ssh/authorized_keys && sudo chown ansible:ansible $TARGET/.ssh/authorized_keys"
 
   echo "✅ Готово для $HOST"
