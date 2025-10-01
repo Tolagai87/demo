@@ -1,7 +1,11 @@
-- name: Install etcd package
-  dnf:
-    name: etcd
-    state: present
+- name: Copy binary
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: u=rwx,g=x,o=x
+  loop:
+  - etcd
+  - etcdctl
 
 - name: Ensure etcd group exists
   group:
