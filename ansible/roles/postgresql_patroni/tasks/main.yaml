@@ -13,6 +13,7 @@
   ansible.builtin.dnf:
     name: 
       - postgresql-server
+      - postgresql-contrib
       - python3-pip
     state: latest
 
@@ -33,6 +34,11 @@
     src: patroni.yml.j2
     dest: /etc/patroni.yml
     mode: 0644
+  
+- name: Restart patroni patroni
+  systemd:
+    name: patroni
+    state: restart
 
 - name: Create systemd unit for Patroni
   template:

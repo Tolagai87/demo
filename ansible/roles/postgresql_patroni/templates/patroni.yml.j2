@@ -26,6 +26,10 @@ postgresql:
     wal_keep_size: 64MB
     archive_mode: "on"
     archive_command: 'true'
+    shared_preload_libraries: "pg_stat_statements"
+    pg_stat_statements.track: all
+    pg_stat_statements.max: 10000
+    pg_stat_statements.save: on
 
 {% if inventory_hostname == bootstrap_node %}
 bootstrap:

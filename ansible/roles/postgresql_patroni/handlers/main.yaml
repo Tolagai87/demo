@@ -1,12 +1,2 @@
 ---
 # handlers file for docker
-- name: start 
-  systemd:
-    name: postgresql.service
-    state: started
-    enabled: true
-
-- name: restart
-  systemd:
-    name: postgresql.service
-    state: restarted
