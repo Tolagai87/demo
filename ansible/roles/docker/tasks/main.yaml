@@ -1,14 +1,17 @@
 ---
 # tasks file for docker
-- name: Enable Docker CE repo
-  dnf:
-    name: https://download.docker.com/linux/centos/docker-ce.repo
-    state: present
+- name: Add Docker CE repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
 
-- name: Install Docker
-  dnf:
-    name: docker-ce
-    state: latest
+- name: Install Docker CE with --nobest
+  shell: dnf install -y docker-ce --nobest
+  args:
+    warn: false
+  register: docker_install
+  changed_when: "'Complete!' in docker_install.stdout"
+
 
 - name: Docker config
   template:

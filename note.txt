@@ -5,6 +5,10 @@ cat /home/ansible/.ssh/id_rsa.pub  # на docker01
 скопировать публичный ключ на все хосты
 vim /home/ansible/.ssh/authorized_keys
 
+отключаем запрос пароля при sudo
+visudo
+ansible ALL=(ALL)       NOPASSWD: ALL
+
 su postgres
 psql
 CREATE ROLE test_user WITH LOGIN PASSWORD 'm9DMjeb2JoADF8kgZxfx';

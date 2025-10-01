@@ -49,7 +49,10 @@
     src: etcd.service.j2
     dest: /etc/systemd/system/etcd.service
     mode: '0644'
-  notify: Reload systemd
+    
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
 
 - name: Enable and start etcd service
   systemd:
