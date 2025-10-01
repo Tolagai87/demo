@@ -1,4 +1,4 @@
 postgresql_version: "16"
 etcd_host: 192.168.56.10
 cluster_name: "pg_cluster"
-patroni_data_dir: "/var/lib/postgresql/{{ postgresql_version }}/data"
+patroni_data_dir: "/var/lib/pgsql/data"

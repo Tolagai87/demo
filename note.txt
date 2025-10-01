@@ -9,6 +9,8 @@ vim /home/ansible/.ssh/authorized_keys
 visudo
 ansible ALL=(ALL)  NOPASSWD: ALL
 
+patronictl -c /etc/patroni.yml list
+
 su postgres
 psql
 CREATE ROLE test_user WITH LOGIN PASSWORD 'm9DMjeb2JoADF8kgZxfx';
