@@ -1,6 +1,0 @@
-etcd_host: 192.168.1.100
-pg_version: 16
-pg_datadir: /postgresql
-pg_user_pass: WZEaAkvdYQ7nybS9fRxd
-pg_replica_user: replicator
-pg_replica_userpass: B6DYFl4JK2CHpQ5yp5Ly
