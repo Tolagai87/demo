@@ -27,6 +27,7 @@ postgresql:
     archive_mode: "on"
     archive_command: 'true'
 
+{% if inventory_hostname == bootstrap_node %}
 bootstrap:
   dcs:
     ttl: 30
@@ -50,3 +51,4 @@ bootstrap:
       options:
         - replication
         - login
+{% endif %}
