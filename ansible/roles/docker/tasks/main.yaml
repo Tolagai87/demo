@@ -12,7 +12,6 @@
   register: docker_install
   changed_when: "'Complete!' in docker_install.stdout"
 
-
 - name: Docker config
   template:
     src: daemon.json.j2

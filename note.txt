@@ -7,7 +7,7 @@ vim /home/ansible/.ssh/authorized_keys
 
 отключаем запрос пароля при sudo
 visudo
-ansible ALL=(ALL)       NOPASSWD: ALL
+ansible ALL=(ALL)  NOPASSWD: ALL
 
 su postgres
 psql
