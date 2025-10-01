@@ -2,7 +2,7 @@ scope: {{ cluster_name }}
 name: {{ inventory_hostname }}
 
 restapi:
-  listen: "{{ ansible_host }}:8008"
+  listen: 0.0.0.0:8008"
   connect_address: "{{ ansible_host }}:8008"
 
 etcd3:
