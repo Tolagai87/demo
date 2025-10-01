@@ -5,3 +5,19 @@ cat /home/ansible/.ssh/id_rsa.pub  # на docker01
 скопировать публичный ключ на все хосты
 vim /home/ansible/.ssh/authorized_keys
 
+su postgres
+psql
+CREATE ROLE test_user WITH LOGIN PASSWORD 'm9DMjeb2JoADF8kgZxfx';
+CREATE DATABASE test_db1 OWNER test_user;
+
+CREATE EXTENSION pg_stat_statements;
+
+#внести корректировку в конфиг postgrsql.conf эти строки и перезапустить сервис
+ shared_preload_libraries = 'pg_stat_statements'
+ pg_stat_statements.max = 10000
+ pg_stat_statements.track = all
+
+CREATE ROLE svc_monitoring WITH LOGIN PASSWORD 'vxonMmJjOGKOZzgPx3z0';
+
+GRANT SELECT ON pg_stat_statements TO svc_monitoring;
+GRANT CONNECT ON DATABASE test_db1 TO svc_monitoring;
