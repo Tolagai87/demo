@@ -38,7 +38,7 @@
 - name: Restart patroni patroni
   systemd:
     name: patroni
-    state: restart
+    state: restarted
 
 - name: Create systemd unit for Patroni
   template:
