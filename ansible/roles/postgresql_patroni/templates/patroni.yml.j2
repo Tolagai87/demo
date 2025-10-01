@@ -27,6 +27,10 @@ postgresql:
     archive_mode: "on"
     archive_command: 'true'
 
+pg_hba:
+    - host all all 0.0.0.0/0 trust
+    - host replication replicator 0.0.0.0/0 trust
+
 bootstrap:
   dcs:
     ttl: 30
