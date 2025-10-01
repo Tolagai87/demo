@@ -14,12 +14,12 @@
     mode: '0755'
 
 - name: Copy Exporter
-  file:
+  copy:
     src: postgres_exporter
     dest: "{{ install_dir }}/postgres_exporter"
     owner: "{{ pg_exporter_user }}"
     group: "{{ pg_exporter_user }}"
-    mode: '0644'
+    mode: '0755'
 
 - name: Copy Postgres Exporter systemd service
   template:

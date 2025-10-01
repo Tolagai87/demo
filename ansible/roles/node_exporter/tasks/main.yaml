@@ -15,12 +15,12 @@
     mode: '0755'
 
 - name: Download Node Exporter
-  file:
+  copy:
     src: node_exporter
     dest: "{{ install_dir }}/node_exporter"
     owner: "{{ node_exporter_user }}"
     group: "{{ node_exporter_user }}"
-    mode: '0644'
+    mode: '0755'
 
 - name: Copy Node Exporter systemd service
   template:
