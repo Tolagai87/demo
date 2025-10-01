@@ -2,7 +2,7 @@
 
 PUBKEY="/home/ansible/.ssh/id_rsa.pub"
 TARGET="/home/ansible"
-HOSTS=("192.168.56.10" "192.168.56.11" "192.168.56.12")
+HOSTS=("192.168.56.10" "192.168.56.11" "192.168.56.12" "localhost")
 USER="vagrant"
 
 if [ ! -f "$PUBKEY" ]; then

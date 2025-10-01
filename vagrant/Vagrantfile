@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
         sudo mkdir -p /home/ansible/.ssh
         sudo chmod 700 /home/ansible/.ssh
         sudo chown -R ansible:ansible /home/ansible/.ssh
+        sudo timedatectl set-timezone Asia/Almaty
       SHELL
 
        # Установка Ansible только на docker01
