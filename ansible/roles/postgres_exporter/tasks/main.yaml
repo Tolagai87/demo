@@ -14,7 +14,7 @@
     mode: '0755'
 
 - name: Copy Exporter
-  files:
+  file:
     src: postgres_exporter
     dest: "{{ install_dir }}/postgres_exporter"
     owner: "{{ pg_exporter_user }}"

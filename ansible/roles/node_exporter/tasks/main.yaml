@@ -15,7 +15,7 @@
     mode: '0755'
 
 - name: Download Node Exporter
-  files:
+  file:
     src: node_exporter
     dest: "{{ install_dir }}/node_exporter"
     owner: "{{ node_exporter_user }}"
