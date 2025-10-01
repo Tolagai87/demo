@@ -1,23 +1,46 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "oraclelinux/8"
+  config.vm.box = "eurolinux-vagrant/oracle-linux-8"
+  config.vm.box_version = "8.10.5"
 
   machines = {
-    "etcd01" => { ip: "192.168.56.10", ports: [] },
-    "pgsql01" => { ip: "192.168.56.11", ports: [5432] },
-    "pgsql02" => { ip: "192.168.56.12", ports: [5432] },
-    "docker01" => { ip: "192.168.56.13", ports: [9090, 3000] }
+    "etcd01" => {
+      ip: "192.168.56.10",
+      ports: [],
+      memory: 512,
+      cpus: 1
+    },
+    "pgsql01" => {
+      ip: "192.168.56.11",
+      ports: [{ guest: 5432, host: 5532 }],
+      memory: 1024,
+      cpus: 1
+    },
+    "pgsql02" => {
+      ip: "192.168.56.12",
+      ports: [{ guest: 5432, host: 5533 }],
+      memory: 1024,
+      cpus: 1
+    },
+    "docker01" => {
+      ip: "192.168.56.13",
+      ports: [{ guest: 9090, host: 19090 }, { guest: 3000, host: 13000 }],
+      memory: 2048,
+      cpus: 1
+    }
   }
 
   machines.each do |name, opts|
     config.vm.define name do |vm|
       vm.vm.hostname = name
       vm.vm.network "private_network", ip: opts[:ip]
+
       opts[:ports].each do |port|
-        vm.vm.network "forwarded_port", guest: port, host: port
-      end
+        vm.vm.network "forwarded_port", guest: port[:guest], host: port[:host]
+      end if opts[:ports]
+
       vm.vm.provider "virtualbox" do |vb|
-        vb.memory = 2048
-        vb.cpus = 1
+        vb.memory = opts[:memory]
+        vb.cpus = opts[:cpus]
       end
       
       # Создание пользователя ansible
@@ -26,11 +49,6 @@ Vagrant.configure("2") do |config|
         sudo mkdir -p /home/ansible/.ssh
         sudo chmod 700 /home/ansible/.ssh
         sudo chown -R ansible:ansible /home/ansible/.ssh
-
-        # Добавление публичного ключа (замени на свой)
-        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOlnoNjJYpvl4K28xlM+eEkRvdKVNBM5hS89QuWBObV0Oc7MgLSKB1h1HNJXF419H54uBZlFs3XfQfP05mot+61ygeR2IJJjBj+NPaErA3+7q7n2FbfZDxy4L//5ICB2Vqu/JsYO9Jq7wpjK91ToXX4QcKTb0mQf5ww+/Xy+Fb6YCjrtlCJFUNLDx0FeXGPC3LXbDXs1P1NQ7MJ7PoI+AYf1o0KZjjTy72Lo28y1WJpOybq5FH9PKzG9eL6eXQMCB68E5hhV9GPCL6rifVCntp4JrUn9T27ABsALwsWjKtrhyNMO1dvpO1BYykWlz8/x5pO8SiuQGqQLV+lLycIIyT noname" | sudo tee /home/ansible/.ssh/authorized_keys
-        sudo chmod 600 /home/ansible/.ssh/authorized_keys
-        sudo chown ansible:ansible /home/ansible/.ssh/authorized_keys
       SHELL
 
        # Установка Ansible только на docker01
@@ -40,7 +58,6 @@ Vagrant.configure("2") do |config|
           sudo dnf install -y ansible
         SHELL
       end
-      
     end
   end
 end

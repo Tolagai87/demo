@@ -1,0 +1,7 @@
+vagrant ssh docker01
+
+ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa -N ""
+cat /home/ansible/.ssh/id_rsa.pub  # на docker01
+скопировать публичный ключ на все хосты
+vim /home/ansible/.ssh/authorized_keys
+

@@ -1,0 +1,12 @@
+.vagrant/
+*.box
+*.log
+*.retry
+*.pid
+*.bak
+*.log
+*.tmp
+__pycache__/
+*.pyc
+.cache/
+.fact_cache/
