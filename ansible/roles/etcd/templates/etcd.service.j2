@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User={{ etcd_user }}
 Type=notify
-ExecStart=/usr/bin/etcd --config-file={{ etcd_config_path }}
+ExecStart=/usr/bin/etcd
 Restart=always
 LimitNOFILE=65536
 
