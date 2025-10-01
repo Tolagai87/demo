@@ -1,6 +1,6 @@
 [etcd]
-etcd01 ansible_host=192.168.1.100
+etcd01 ansible_host=192.168.56.10
 
 [pg_cluster]
-pgsql01 ansible_host=192.168.1.101
-pgsql02 ansible_host=192.168.1.102
+pgsql01 ansible_host=192.168.56.11
+pgsql02 ansible_host=192.168.56.12
