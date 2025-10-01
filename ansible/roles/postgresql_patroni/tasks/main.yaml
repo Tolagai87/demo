@@ -39,21 +39,13 @@
     src: patroni.service.j2
     dest: /etc/systemd/system/patroni.service
     mode: 0644
-  ansible.biltin.meta: reboot
+  
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
 
 - name: Enable and start Patroni
   systemd:
     name: patroni
     enabled: yes
     state: started
-
-
-- name: Create PostgreSQL User
-  community.postgresql.postgresql_user:
-    name: "{{ pg_user }}"
-    password: "{{ pg_user_pass }}"
-    role_attr_flags: "REPLICATION" 
-
-
-- name: Перезапустить сервис снова
-  ansible.builtin.meta: flush_handlers

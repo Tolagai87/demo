@@ -1,9 +1,5 @@
 ---
 # handlers file for docker
-- name: reboot
-  systemd:
-    daemon_reload: true
-
 - name: start 
   systemd:
     name: postgresql.service
