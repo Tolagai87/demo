@@ -4,9 +4,14 @@ After=network.target
 
 [Service]
 User={{ etcd_user }}
-Type=notify
-ExecStart=/usr/local/bin/etcd
+Group={{ etcd_group }}
+ExecStart=/usr/local/bin/etcd \
+  --name etcd01 \
+  --data-dir {{ etcd_data_dir }} \
+  --listen-client-urls http://0.0.0.0:2379 \
+  --advertise-client-urls http://{{ ansible_host }}:2379
 Restart=always
+RestartSec=5
 LimitNOFILE=65536
 
 [Install]
