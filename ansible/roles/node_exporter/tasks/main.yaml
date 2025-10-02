@@ -14,7 +14,7 @@
     group: "{{ node_exporter_user }}"
     mode: '0755'
 
-- name: Download Node Exporter
+- name: Copy Node Exporter
   copy:
     src: node_exporter
     dest: "{{ install_dir }}/node_exporter"

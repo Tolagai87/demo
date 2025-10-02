@@ -16,4 +16,4 @@ scrape_configs:
 
   - job_name: 'node_pgsql02'
     static_configs:
-      - targets: ['pgsql02:9187']
+      - targets: ['pgsql02:9188']
