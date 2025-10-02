@@ -1,15 +1,20 @@
 vagrant ssh docker01
 
+cd /home/ansible
+git clone https://github.com/Tolagai87/demo.git
+
 ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa -N ""
-cat /home/ansible/.ssh/id_rsa.pub  # на docker01
+
 скопировать публичный ключ на все хосты
-vim /home/ansible/.ssh/authorized_keys
+/home/ansible/.ssh/authorized_keys
 
 отключаем запрос пароля при sudo
-visudo
+vim /etc/sudoers.d/ansible
 ansible ALL=(ALL)  NOPASSWD: ALL
 
 /usr/local/bin/etcdctl --endpoints=http://192.168.56.10:2379 endpoint health
+
+
 
 /usr/local/bin/patronictl -c /etc/patroni.yml list
 

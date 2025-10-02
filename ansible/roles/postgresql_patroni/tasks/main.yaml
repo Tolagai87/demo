@@ -34,11 +34,6 @@
     src: patroni.yml.j2
     dest: /etc/patroni.yml
     mode: 0644
-  
-- name: Restart patroni patroni
-  systemd:
-    name: patroni
-    state: restarted
 
 - name: Create systemd unit for Patroni
   template:
@@ -50,8 +45,8 @@
   systemd:
     daemon_reload: yes
 
-- name: Enable and start Patroni
+- name: Enable and Restart Patroni
   systemd:
     name: patroni
     enabled: yes
-    state: started
+    state: restarted

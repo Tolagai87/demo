@@ -11,8 +11,8 @@
 - hosts: pg_cluster
   become: yes
   roles:
-    # - postgresql_patroni
-    - postgres_exporter
+    - postgresql_patroni
+    # - postgres_exporter
 
 # - hosts: all
 #   become: yes
