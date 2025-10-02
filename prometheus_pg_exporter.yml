@@ -13,7 +13,13 @@ scrape_configs:
   - job_name: 'node_pgsql01'
     static_configs:
       - targets: ['pgsql02:9187']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance  
 
   - job_name: 'node_pgsql02'
     static_configs:
       - targets: ['pgsql02:9188']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
